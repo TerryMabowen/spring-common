@@ -65,6 +65,16 @@
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
     </properties>
 
+    <dependencies>
+        <!--lombok 完成get set toString注册-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <!--spring web-->
@@ -413,13 +423,6 @@
                 <artifactId>easypoi-annotation</artifactId>
                 <version>${easypoi.version}</version>
             </dependency>
-            <!--servlet-->
-<!--            <dependency>-->
-<!--                <groupId>javax.servlet</groupId>-->
-<!--                <artifactId>javax.servlet-api</artifactId>-->
-<!--                <version>${servlet.api.version}</version>-->
-<!--                <scope>provided</scope>-->
-<!--            </dependency>-->
             <!--okhttp-->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
@@ -475,10 +478,6 @@
                         <groupId>com.fasterxml.jackson.core</groupId>
                         <artifactId>jackson-databind</artifactId>
                     </exclusion>
-<!--                    <exclusion>-->
-<!--                        <groupId>commons-codec</groupId>-->
-<!--                        <artifactId>commons-codec</artifactId>-->
-<!--                    </exclusion>-->
                 </exclusions>
             </dependency>
             <!--jjwt-->
@@ -491,10 +490,6 @@
                         <groupId>com.fasterxml.jackson.core</groupId>
                         <artifactId>jackson-databind</artifactId>
                     </exclusion>
-<!--                    <exclusion>-->
-<!--                        <groupId>commons-codec</groupId>-->
-<!--                        <artifactId>commons-codec</artifactId>-->
-<!--                    </exclusion>-->
                 </exclusions>
             </dependency>
             <!-- ant -->
