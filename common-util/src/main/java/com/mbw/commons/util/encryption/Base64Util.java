@@ -15,20 +15,16 @@ public class Base64Util {
     static {
         for (int i = 0; i < 256; i++) {
             codes[i] = -1;
-            // LoggerUtil.debug(i + "&" + codes[i] + " ");
         }
         for (int i = 'A'; i <= 'Z'; i++) {
             codes[i] = (byte) (i - 'A');
-            // LoggerUtil.debug(i + "&" + codes[i] + " ");
         }
 
         for (int i = 'a'; i <= 'z'; i++) {
             codes[i] = (byte) (26 + i - 'a');
-            // LoggerUtil.debug(i + "&" + codes[i] + " ");
         }
         for (int i = '0'; i <= '9'; i++) {
             codes[i] = (byte) (52 + i - '0');
-            // LoggerUtil.debug(i + "&" + codes[i] + " ");
         }
         codes['+'] = 62;
         codes['/'] = 63;
@@ -94,10 +90,6 @@ public class Base64Util {
                 --tempLen; // ignore non-valid chars and padding
             }
         }
-        // calculate required length:
-        // -- 3 bytes for every 4 valid base64 chars
-        // -- plus 2 bytes if there are 3 extra base64 chars,
-        // or plus 1 byte if there are 2 extra.
 
         int len = (tempLen / 4) * 3;
         if ((tempLen % 4) == 3) {

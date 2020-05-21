@@ -1,6 +1,7 @@
 package com.mbw.commons.util.uuid;
 
-import com.github.mbw.commons.util.date.DateKit;
+
+import com.mbw.commons.util.date.DateUtil;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class GenerationKit {
      * @date 21:32 2020-04-08
      */
     public synchronized static String generateClientId() {
-        String prefix = DateKit.format(new Date(), DATE_FORMAT);
+        String prefix = DateUtil.format(new Date(), DATE_FORMAT);
 
         synchronized (GenerationKit.class) {
             sed++;

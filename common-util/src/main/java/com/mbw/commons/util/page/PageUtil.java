@@ -1,6 +1,7 @@
 package com.mbw.commons.util.page;
 
-import com.github.mbw.commons.lang.page.PageBean;
+
+import com.mbw.commons.lang.page.PageBean;
 
 import java.util.List;
 

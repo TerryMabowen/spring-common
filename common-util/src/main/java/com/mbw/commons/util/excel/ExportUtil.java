@@ -4,11 +4,11 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
-import com.github.mbw.commons.lang.constants.ExcelConstants;
-import com.github.mbw.commons.lang.exception.ServiceException;
-import com.github.mbw.commons.util.date.DateKit;
-import com.github.mbw.commons.util.io.FileUtil;
-import com.github.mbw.commons.util.validate.AssertUtil;
+import com.mbw.commons.lang.constants.ExcelConstants;
+import com.mbw.commons.lang.exception.ServiceException;
+import com.mbw.commons.util.date.DateUtil;
+import com.mbw.commons.util.io.FileUtil;
+import com.mbw.commons.util.validate.AssertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -107,7 +107,7 @@ public class ExportUtil {
             if (workbooks.size() == 1 && excelNames.size() == 1) {
                 exportExcel(workbooks.get(0), excelNames.get(0), response);
             } else {
-                String currentTimestamp = DateKit.getCurrentTimestamp();
+                String currentTimestamp = DateUtil.getCurrentTimestamp();
                 String excelPath = rootPath + ExcelConstants.EXCEL_PATH + File.separator + currentTimestamp + File.separator;
                 String zipPath = rootPath + ExcelConstants.ZIP_PATH + File.separator + currentTimestamp + File.separator;
 

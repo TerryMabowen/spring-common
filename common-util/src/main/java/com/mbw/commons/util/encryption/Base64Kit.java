@@ -1,6 +1,6 @@
 package com.mbw.commons.util.encryption;
 
-import com.github.mbw.commons.lang.exception.ServiceException;
+import com.mbw.commons.lang.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Base64;

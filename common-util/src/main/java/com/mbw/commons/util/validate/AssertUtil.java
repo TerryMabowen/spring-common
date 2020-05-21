@@ -1,8 +1,8 @@
 package com.mbw.commons.util.validate;
 
-import com.github.mbw.commons.lang.enums.BaseEnumStatus;
-import com.github.mbw.commons.lang.exception.AssertException;
-import com.github.mbw.commons.util.enums.EnumUtil;
+import com.mbw.commons.lang.enums.BaseEnumStatus;
+import com.mbw.commons.lang.exception.AssertException;
+import com.mbw.commons.util.enums.EnumUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;

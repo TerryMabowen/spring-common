@@ -1,6 +1,6 @@
 package com.mbw.commons.util.uuid;
 
-import com.github.mbw.commons.util.date.DateKit;
+import com.mbw.commons.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -22,7 +22,7 @@ public class GenerateCodeKit {
      * @return {@link String}
      */
     public synchronized static String generateBusinessCode() {
-        String prefix = DateKit.format(new Date(), DATE_FORMAT);
+        String prefix = DateUtil.format(new Date(), DATE_FORMAT);
 
         synchronized (GenerateCodeKit.class) {
             sed++;

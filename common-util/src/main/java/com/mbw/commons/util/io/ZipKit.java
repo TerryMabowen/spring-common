@@ -1,6 +1,6 @@
 package com.mbw.commons.util.io;
 
-import com.github.mbw.commons.lang.exception.ServiceException;
+import com.mbw.commons.lang.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.zip.ZipEntry;

@@ -1,12 +1,10 @@
 package com.mbw.commons.util.convert;
 
-import com.github.mbw.commons.lang.enums.EnumDataType;
-import com.github.mbw.commons.lang.exception.ServiceException;
+import com.mbw.commons.lang.enums.EnumDataType;
+import com.mbw.commons.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -29,14 +27,8 @@ public class DataConvertUtil {
             } else if (EnumDataType.STRING.getValue().equals(type)) {
                 map.put(variate, value);
             } else if (EnumDataType.DATE.getValue().equals(type)) {
-                try {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    Date date = format.parse(value);
-                    map.put(variate, date);
-                } catch (ParseException e) {
-                    log.error("将字符串解析成时间类型异常：" + e.getMessage(), e);
-                    throw new ServiceException("将字符串解析成时间类型异常：" + e.getMessage());
-                }
+                Date date = DateUtil.parse(value, "yyyy-MM-dd HH:mm:ss");
+                map.put(variate, date);
             } else if (EnumDataType.BOOL.getValue().equals(type)) {
                  if ("true".equals(value.toLowerCase())) {
                      map.put(variate, Boolean.TRUE);

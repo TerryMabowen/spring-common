@@ -1,7 +1,8 @@
 package com.mbw.commons.util.enums;
 
-import com.github.mbw.commons.lang.enums.BaseEnumStatus;
-import com.github.mbw.commons.lang.enums.CommonEnumStatus;
+
+import com.mbw.commons.lang.enums.BaseEnumStatus;
+import com.mbw.commons.lang.enums.CommonEnumStatus;
 
 /**
  * TODO

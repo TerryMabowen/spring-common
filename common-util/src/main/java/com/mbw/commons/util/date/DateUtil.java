@@ -1,6 +1,6 @@
 package com.mbw.commons.util.date;
 
-import com.github.mbw.commons.lang.exception.ServiceException;
+import com.mbw.commons.lang.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Mabowen
  * @date 2020-04-08 22:07
  */
-public class DateKit {
+public class DateUtil {
     private static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
