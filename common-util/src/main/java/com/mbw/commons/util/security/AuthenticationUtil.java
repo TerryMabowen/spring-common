@@ -15,4 +15,8 @@ public class AuthenticationUtil {
     public static UserInfo getUserInfo() {
         return getUserInfo();
     }
+
+    public static void setUserInfo(UserInfo userInfo) {
+
+    }
 }
