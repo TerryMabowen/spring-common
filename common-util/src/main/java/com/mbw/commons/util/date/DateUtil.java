@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,6 +16,15 @@ import java.util.Date;
  */
 public class DateUtil {
     private static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static Date now() {
+        Calendar cal = Calendar.getInstance();
+        return cal.getTime();
+    }
 
     /**
      * TODO
