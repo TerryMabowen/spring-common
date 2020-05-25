@@ -1,6 +1,5 @@
 package com.mbw.commons.dal.mapper;
 
-import com.sun.istack.internal.NotNull;
 
 /**
  * TODO
@@ -15,17 +14,17 @@ public interface BaseMapper<T> {
      * @param id 主键ID
      * @return T
      */
-    T getById(@NotNull Long id);
+    T getById(Long id);
 
     /**
      * 更新对象
      * @param t 主键ID
      */
-    void updateById(@NotNull T t);
+    void updateById(T t);
 
     /**
      * 根据主键ID删除对象
      * @param id 主键ID
      */
-    void deleteById(@NotNull Long id);
+    void deleteById(Long id);
 }
