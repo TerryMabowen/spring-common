@@ -4,17 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * TODO
+ *
  * @author Mabowen
- * @date 2019-12-20 17:14
+ * @date 2020-05-25 19:58
  */
 @Getter
 @AllArgsConstructor
-public enum CommonEnumStatus implements BaseEnumStatus<Integer> {
+public enum EnumResponseCode implements BaseEnumStatus<Integer>{
     /**
      * 未知状态
      */
-    UNKNOWN(-10000, "未知状态");
+    UNKNOWN(40000, "未知错误");
+
 
     private Integer value;
+
     private String desc;
 }
