@@ -17,7 +17,7 @@
                 %M : 日志输出所在方法名
                 hostName : 本地机器名
                 hostAddress : 本地ip地址 -->
-        <property name="PATTERN">%highlight{[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t-%L] [%5p] [%l] -%logger{36} %L %M - %msg%xEx%n}{FATAL=blue, ERROR=red, WARN=orange, INFO=Green, DEBUG=black, TRACE=gray}</property>
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t-%L] %logger{36} %L %M - %msg%xEx%n</property>
     </properties>
     <!--先定义所有的appender-->
     <appenders>
@@ -31,6 +31,19 @@
             <PatternLayout pattern="${PATTERN}"/>
         </File>
         <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <!--DEBUG-->
+        <RollingFile name="RollingFileDebug" fileName="${logPath}/logs/debug.log"
+                     filePattern="${logPath}/logs/${date:yyyy-MM}/debug-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+        <!--INFO-->
         <RollingFile name="RollingFileInfo" fileName="${logPath}/logs/info.log"
                      filePattern="${logPath}/logs/${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
@@ -38,45 +51,46 @@
             <PatternLayout pattern="${PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="100MB"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="31"/>
         </RollingFile>
+        <!--WARN-->
         <RollingFile name="RollingFileWarn" fileName="${logPath}/logs/warn.log"
                      filePattern="${logPath}/logs/${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="100MB"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
-            <DefaultRolloverStrategy max="20"/>
+            <DefaultRolloverStrategy max="31"/>
         </RollingFile>
+        <!--ERROR-->
         <RollingFile name="RollingFileError" fileName="${logPath}/logs/error.log"
                      filePattern="${logPath}/logs/${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="100MB"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="31"/>
         </RollingFile>
     </appenders>
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
-        <logger name="org.springframework" level="WARN" />
-        <logger name="org.springframework.boot" level="INFO" />
-        <logger name="org.mybatis.spring.mapper" level="DEBUG" />
-        <logger name="org.mybatis" level="WARN" />
-        <logger name="org.apache" level="WARN" />
-        <logger name="org.apache.cxf" level="ERROR" />
-        <logger name="net.sf.ehcache" level="WARN" />
-        <logger name="org.hibernate.validator" level="WARN" />
+<!--        <logger name="org.apache" level="WARN" />-->
+<!--        <logger name="org.apache.cxf" level="ERROR" />-->
+<!--        <logger name="net.sf.ehcache" level="WARN" />-->
+<!--        <logger name="org.hibernate.validator" level="WARN" />-->
         <logger name="com.mbw.blog" level="DEBUG" />
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="FileLog"/>
+            <appender-ref ref="RollingFileDebug"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>
             <appender-ref ref="RollingFileError"/>

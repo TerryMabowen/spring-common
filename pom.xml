@@ -44,6 +44,7 @@
         <jwt.version>3.3.0</jwt.version>
         <easypoi.version>4.0.0</easypoi.version>
         <springfox.swagger2>2.9.2</springfox.swagger2>
+        <mybatis.plus.version>3.2.0</mybatis.plus.version>
         <mybatis.spring.version>2.1.2</mybatis.spring.version>
         <mybatis.pageHelper.version>1.2.13</mybatis.pageHelper.version>
         <mybatis.mapper.version>2.1.5</mybatis.mapper.version>
@@ -252,6 +253,11 @@
                 <scope>runtime</scope>
             </dependency>
             <!--mybatis-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
