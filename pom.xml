@@ -54,6 +54,8 @@
         <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
         <thymeleaf-layout-dialect.version>2.4.1</thymeleaf-layout-dialect.version>
         <groovy.version>2.5.7</groovy.version>
+        <retrofit2.version>2.5.0</retrofit2.version>
+        <apache.httpclient.version>4.5.8</apache.httpclient.version>
         <!-- Plugin Attribute -->
         <java.version>1.8</java.version>
         <apache.maven.plugin.compiler.version>3.1</apache.maven.plugin.compiler.version>
@@ -573,6 +575,23 @@
                 <groupId>com.google.dagger</groupId>
                 <artifactId>dagger</artifactId>
                 <version>${dagger.version}</version>
+            </dependency>
+            <!--retrofit2-->
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>retrofit</artifactId>
+                <version>${retrofit2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>converter-gson</artifactId>
+                <version>${retrofit2.version}</version>
+            </dependency>
+            <!--apache httpClient-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache.httpclient.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
