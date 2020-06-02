@@ -651,8 +651,66 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
+            <!-- 编码规约扫描命令： mvn pmd:pmd-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-pmd-plugin</artifactId>-->
+<!--                <version>3.12.0</version>-->
+<!--                <configuration>-->
+<!--                    <rulesets>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-comment.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-concurrent.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-constant.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-exception.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-flowcontrol.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-naming.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-oop.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-orm.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-other.xml</ruleset>-->
+<!--                        <ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-set.xml</ruleset>-->
+<!--                    </rulesets>-->
+<!--                    <printFailingErrors>true</printFailingErrors>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash; 绑定pmd:check到verify生命周期 &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>pmd-check-verify</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; 绑定pmd:pmd到site生命周期 &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>pmd-pmd-site</id>-->
+<!--                        <phase>site</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>pmd</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                &lt;!&ndash; p3c依赖 &ndash;&gt;-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.alibaba.p3c</groupId>-->
+<!--                        <artifactId>p3c-pmd</artifactId>-->
+<!--                        <version>2.0.1</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--            </plugin>-->
         </plugins>
     </build>
+
+    <!-- 用于生成错误到代码内容的链接 mvn site -->
+<!--    <reporting>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jxr-plugin</artifactId>-->
+<!--                <version>2.5</version>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </reporting>-->
 
     <scm>
         <connection>scm:git:https://github.com/TerryMabowen/spring-common.git</connection>
