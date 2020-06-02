@@ -1,4 +1,4 @@
-package com.mbw.commons.core.api;
+package com.mbw.commons.core.api.domain;
 
 import lombok.Data;
 

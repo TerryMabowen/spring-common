@@ -6,6 +6,7 @@ import com.baidu.unbiz.fluentvalidator.jsr303.HibernateSupportedValidator;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mbw.commons.core.api.domain.LoginResponseData;
 import com.mbw.commons.lang.exception.OkHttpException;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
