@@ -24,13 +24,12 @@ public class ExchangeRateCrawlerJob {
      * 4. 获取数据后入库保存到汇率表中，每个币种每天都有汇率，汇率：1外币金额 = xxx 人民币金额
      * 5. 外币换算人民币计算公式为：人民币金额 = 外币金额 * 该币种当天的汇率
      */
-    public void ExchangeRateCrawlerTask() {
+    public void ExecuteExchangeRateCrawlerTask() {
         try {
             Calendar cal = Calendar.getInstance();
             Date now = cal.getTime();
             //货币对枚举
             EnumCurrencyPair[] values = EnumCurrencyPair.values();
-
             for (EnumCurrencyPair value : values) {
                 String currency = value.getValue();
                 //模拟查询数据库数据
@@ -93,7 +92,6 @@ public class ExchangeRateCrawlerJob {
         List<String> rangeDate = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         cal.setTime(beginTime);
-        System.out.println(rangeDay);
         for (int i = 0; i <= rangeDay; i++) {
             rangeDate.add(DateUtil.format(cal.getTime(), "yyyy-MM-dd"));
             cal.add(Calendar.DATE, 1);

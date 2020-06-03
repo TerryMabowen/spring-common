@@ -36,7 +36,7 @@ public class ExchangeRatePageProcessor implements PageProcessor {
                 Selectable tdSelectable = trSelectable.$("td");
                 List<String> tds = tdSelectable.all();
                 if (tds != null && tds.size() == 7) {
-                    ExchangeRateCrawlerData bocCrawlerData = new ExchangeRateCrawlerData();
+                    ExchangeRateCrawlerData crawlerData = new ExchangeRateCrawlerData();
                     String currencyName = parseTd(tds.get(0));
                     String buyingRate = parseTd(tds.get(1));
                     String cashBuyingRate = parseTd(tds.get(2));
@@ -44,14 +44,14 @@ public class ExchangeRatePageProcessor implements PageProcessor {
                     String cashSellingRate = parseTd(tds.get(4));
                     String middleRate = parseTd(tds.get(5));
                     String pubTime = parseTd(tds.get(6));
-                    bocCrawlerData.setCurrencyName(currencyName);
-                    bocCrawlerData.setBuyingRate(convertStrToBigDecimal(buyingRate));
-                    bocCrawlerData.setCashBuyingRate(convertStrToBigDecimal(cashBuyingRate));
-                    bocCrawlerData.setSellingRate(convertStrToBigDecimal(sellingRate));
-                    bocCrawlerData.setCashSellingRate(convertStrToBigDecimal(cashSellingRate));
-                    bocCrawlerData.setMiddleRate(convertStrToBigDecimal(middleRate));
-                    bocCrawlerData.setPubTime(DateUtil.parse(pubTime, "yyyy.MM.dd"));
-                    page.putField("tds", bocCrawlerData);
+                    crawlerData.setCurrencyName(currencyName);
+                    crawlerData.setBuyingRate(convertStrToBigDecimal(buyingRate));
+                    crawlerData.setCashBuyingRate(convertStrToBigDecimal(cashBuyingRate));
+                    crawlerData.setSellingRate(convertStrToBigDecimal(sellingRate));
+                    crawlerData.setCashSellingRate(convertStrToBigDecimal(cashSellingRate));
+                    crawlerData.setMiddleRate(convertStrToBigDecimal(middleRate));
+                    crawlerData.setPubTime(DateUtil.parse(pubTime, "yyyy.MM.dd"));
+                    page.putField("tds", crawlerData);
                 }
             }
         }
