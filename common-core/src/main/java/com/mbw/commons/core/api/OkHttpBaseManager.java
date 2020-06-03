@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mbw.commons.core.api.domain.LoginResponseData;
 import com.mbw.commons.lang.exception.OkHttpException;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -47,6 +49,8 @@ public abstract class OkHttpBaseManager {
     private final static String CHARSET = "UTF-8";
 
     @Autowired
+    @Getter
+    @Setter
     private OkHttpConfig okHttpConfig;
 
     private AtomicInteger speedPerSecond = new AtomicInteger(0);
@@ -69,7 +73,8 @@ public abstract class OkHttpBaseManager {
 
                 Request request = chain.request()
                         .newBuilder()
-                        .addHeader("Content-Type","application/json")
+                        .addHeader("Content-Type","text/html")
+//                        .addHeader("Content-Type","application/json")
 //                        .addHeader("Authorization", "Bearer " + accessToken)
 //                        .addHeader("AppId", okHttpConfig.getAppId())
 //                        .addHeader("AppSecret", okHttpConfig.getAppSecret())
@@ -78,7 +83,8 @@ public abstract class OkHttpBaseManager {
                 long beginTime = System.currentTimeMillis();
 
                 Response response = chain.proceed(request);
-                response.header("Content-Type","application/json");
+//                response.header("Content-Type","application/json");
+                response.header("Content-Type","text/html");
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 Sink sink = Okio.sink(baos);
