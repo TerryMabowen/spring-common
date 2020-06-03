@@ -56,6 +56,8 @@
         <groovy.version>2.5.7</groovy.version>
         <retrofit2.version>2.5.0</retrofit2.version>
         <apache.httpclient.version>4.5.8</apache.httpclient.version>
+        <apache.commons.lang3.version>3.10</apache.commons.lang3.version>
+        <jsoup.version>1.13.1</jsoup.version>
         <!-- Plugin Attribute -->
         <java.version>1.8</java.version>
         <apache.maven.plugin.compiler.version>3.1</apache.maven.plugin.compiler.version>
@@ -618,6 +620,18 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${apache.httpclient.version}</version>
+            </dependency>
+            <!--apache commons-lang3-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.lang3.version}</version>
+            </dependency>
+            <!--jsoup 解析html-->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -80,5 +82,55 @@ public class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
         Date date = new Date();
         return sdf.format(date);
+    }
+
+    /**
+     * 计算两个字符串日期的时间范围，返回Period
+     * @author Mabowen
+     * @date 10:02 2020-04-10
+     * @param startTime
+     * @param endTime
+     * @return Period.getYears(), getMonths(), getDays()
+     */
+    public static Period computeTimeRange(String startTime, String endTime) {
+        if (StringUtils.isBlank(startTime) || StringUtils.isBlank(endTime)) {
+            throw new ServiceException("传入的字符串时间不能为空");
+        }
+        try {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat(PATTERN);
+            Date startDate = sdf.parse(startTime);
+            cal.setTime(startDate);
+            LocalDate start = LocalDate.of(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_WEEK));
+
+            Date endDate = sdf.parse(endTime);
+            cal.setTime(endDate);
+            LocalDate end = LocalDate.of(cal.get(Calendar.YEAR) - 1900, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_WEEK));
+
+            return Period.between(start, end);
+        } catch (Exception exp) {
+            exp.printStackTrace();
+            throw new ServiceException("解析字符串日期异常：" + exp.getMessage(), exp);
+        }
+    }
+
+    /**
+     * 获取传入时间多少天之后的日期
+     * @author Mabowen
+     * @date 10:16 2020-04-15
+     * @param current
+     * @param days
+     * @return
+     */
+    public static Date getAfterDate(Date current, int days) {
+        if (current == null) {
+            throw new ServiceException("传入的日期不能为null");
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(current);
+
+        cal.add(Calendar.DAY_OF_MONTH, days);
+
+        return cal.getTime();
     }
 }

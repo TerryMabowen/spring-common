@@ -24,7 +24,7 @@ public class EnumUtil {
             }
         }
 
-        return CommonEnumStatus.UNKOWN;
+        return CommonEnumStatus.UNKNOWN;
     }
 
     public static <T> BaseEnumStatus getEnumByDesc(Class<?> clz, T desc) {
@@ -39,6 +39,6 @@ public class EnumUtil {
             }
         }
 
-        return CommonEnumStatus.UNKOWN;
+        return CommonEnumStatus.UNKNOWN;
     }
 }
