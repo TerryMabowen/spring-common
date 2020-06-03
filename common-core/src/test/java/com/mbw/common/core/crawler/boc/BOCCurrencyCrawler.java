@@ -25,6 +25,7 @@ import java.util.*;
  * @author Mabowen
  * @date 2020-06-02 08:58
  */
+@Deprecated
 public class BOCCurrencyCrawler {
 
     @Test
@@ -36,15 +37,15 @@ public class BOCCurrencyCrawler {
         try {
             String[] currencies = new String[] {"美元", "日元", "港币"};
             String todayDate = DateUtil.format(Calendar.getInstance().getTime(), "yyyy-MM-dd");
-            Map<String, BOCCrawlerData> map = new HashMap<>();
+            Map<String, ExchangeRateCrawlerData> map = new HashMap<>();
             for (String currencyName : currencies) {
                 int pageNo = 1;
-                BOCCrawlerData bocCrawlerData = f3(todayDate, currencyName, pageNo);
+                ExchangeRateCrawlerData bocCrawlerData = f3(todayDate, currencyName, pageNo);
                 map.put(currencyName, bocCrawlerData);
                 //等10s
                 Thread.sleep(10000);
             }
-            for (Map.Entry<String, BOCCrawlerData> entry : map.entrySet()) {
+            for (Map.Entry<String, ExchangeRateCrawlerData> entry : map.entrySet()) {
                 System.out.println(String.format("货币：%s, 汇率信息：%s", entry.getKey(), entry.getValue().toString()));
             }
         } catch (InterruptedException e) {
@@ -52,7 +53,7 @@ public class BOCCurrencyCrawler {
         }
     }
 
-    public BOCCrawlerData f3(String todayDate, String currencyName, int pageNo) {
+    public ExchangeRateCrawlerData f3(String todayDate, String currencyName, int pageNo) {
         try {
 //            String REQUEST_URL = "https://srh.bankofchina.com/search/whpj/search_cn.jsp";
             String requestUrl = "http://www.pbc.gov.cn/zhengcehuobisi/125207/125217/125925/index.html";
@@ -98,7 +99,7 @@ public class BOCCurrencyCrawler {
         }
     }
 
-    public BOCCrawlerData f5(String html, String currencyName, String todayDate) {
+    public ExchangeRateCrawlerData f5(String html, String currencyName, String todayDate) {
         try {
             //采用Jsoup解析
             Document doc = Jsoup.parse(html);
@@ -108,11 +109,11 @@ public class BOCCurrencyCrawler {
                     .select("table")
                     .select("tbody")
                     .select("tr");
-            List<BOCCrawlerData> dataList = Lists.newArrayList();
+            List<ExchangeRateCrawlerData> dataList = Lists.newArrayList();
             for (Element element : elements) {
                 Elements tds = element.children();
                 if (tds != null && tds.size() > 0 && currencyName.equalsIgnoreCase(tds.get(0).text().trim())) {
-                    BOCCrawlerData bocCrawlerData = new BOCCrawlerData();
+                    ExchangeRateCrawlerData bocCrawlerData = new ExchangeRateCrawlerData();
 //                    bocCrawlerData.setCurrencyName(tds.get(0).text().trim());
 //                    bocCrawlerData.setBuyingRate(tds.get(1).text().trim());
 //                    bocCrawlerData.setCashBuyingRate(tds.get(2).text().trim());

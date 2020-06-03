@@ -1,5 +1,7 @@
 package com.mbw.common.core.crawler.test2;
 
+import com.mbw.common.core.crawler.boc.ExchangeRateCrawlerPipeline;
+import com.mbw.common.core.crawler.boc.ExchangeRatePageProcessor;
 import com.mbw.commons.util.date.DateUtil;
 import org.junit.Test;
 import us.codecraft.webmagic.Spider;
@@ -22,9 +24,13 @@ public class Test2 {
     public void f1() {
         try {
             Date now = Calendar.getInstance().getTime();
+            //币种咱们可以定死，就咱们常用的那几个
             String[] currencies = new String[] {"美元", "日元", "欧元"};
-            Date begin = DateUtil.parse("2020-01-01", "yyyy-MM-dd");
+            //去数据库查询每个币种最新的时间，如果没有，则从2020-01-01开始爬取
+            Date begin = DateUtil.parse("2020-06-01", "yyyy-MM-dd");
+            //每次爬取一个月的，防止相同IP请求太多导致被封IP
             Date end = DateUtil.getAfterDate(begin, 30);
+            //爬取到最后就是每天爬取一次
             if (end.getTime() > now.getTime()) {
                 end = now;
             }
@@ -39,10 +45,10 @@ public class Test2 {
                             dateStr +
                             "&pjname=" +
                             currencyName;
-                    Spider.create(new TestRepoPageProcessor())
+                    Spider.create(new ExchangeRatePageProcessor()) //TestRepoPageProcessor 这里进行爬取和解析html获取汇率数据
                             .addUrl(url)
-                            .addPipeline(new BOCCrawlerPipeline())
-                            .thread(1)
+                            .addPipeline(new ExchangeRateCrawlerPipeline()) //BOCCrawlerPipeline 在这里进行入库操作
+                            .thread(1) //单线程爬取
                             .run();
                 }
             }

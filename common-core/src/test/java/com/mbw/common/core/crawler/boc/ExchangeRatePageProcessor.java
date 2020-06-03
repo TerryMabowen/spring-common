@@ -1,6 +1,5 @@
-package com.mbw.common.core.crawler.test2;
+package com.mbw.common.core.crawler.boc;
 
-import com.mbw.common.core.crawler.boc.BOCCrawlerData;
 import com.mbw.commons.util.date.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
@@ -13,17 +12,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * TODO
- *
+ * 中国银行汇率页面数据爬取处理器
+ * 每个币种每天只爬取一页数据，当天的汇率一致，所以只需要一条数据即可，
+ * 需要注意的是中国银行当天汇率是在早上9点半更新，所以爬虫任务最好在10点后执行
  * @author Mabowen
  * @date 2020-06-03 10:27
  */
-public class TestRepoPageProcessor implements PageProcessor {
+public class ExchangeRatePageProcessor implements PageProcessor {
 
     // 抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me()
             .setRetryTimes(3)
-            .setSleepTime(2000);
+            .setSleepTime(3000);
 
     @Override
     public void process(Page page) {
@@ -36,7 +36,7 @@ public class TestRepoPageProcessor implements PageProcessor {
                 Selectable tdSelectable = trSelectable.$("td");
                 List<String> tds = tdSelectable.all();
                 if (tds != null && tds.size() == 7) {
-                    BOCCrawlerData bocCrawlerData = new BOCCrawlerData();
+                    ExchangeRateCrawlerData bocCrawlerData = new ExchangeRateCrawlerData();
                     String currencyName = parseTd(tds.get(0));
                     String buyingRate = parseTd(tds.get(1));
                     String cashBuyingRate = parseTd(tds.get(2));

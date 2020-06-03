@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode
 @ToString
-public class BOCCrawlerData {
+public class ExchangeRateCrawlerData {
     /**
      * 货币名称
      */
