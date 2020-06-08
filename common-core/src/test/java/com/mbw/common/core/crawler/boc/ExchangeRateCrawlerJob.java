@@ -36,8 +36,9 @@ public class ExchangeRateCrawlerJob {
                 ExchangeRatePO po = simulateData(currency);
                 //爬取数据
                 Date beginTime = null;
+                //在获取的发布时间上+1天，如果po为null，则设置默认时间为2020-01-01
                 if (po != null) {
-                    beginTime = po.getPubTime();
+                    beginTime = DateUtil.getAfterDate(po.getPubTime(), 1);
                 } else {
                     //默认时间应是 2020-01-01
                     beginTime = DateUtil.parse("2020-06-01", "yyyy-MM-dd");
@@ -48,6 +49,7 @@ public class ExchangeRateCrawlerJob {
                 if (endTime.getTime() > now.getTime()) {
                     endTime = now;
                 }
+                //时间段
                 List<String> rangeDate = rangeDate(beginTime, endTime);
                 String currencyName = URLEncoder.encode(currency, "UTF-8");
                 rangeDate.forEach(dateStr -> {

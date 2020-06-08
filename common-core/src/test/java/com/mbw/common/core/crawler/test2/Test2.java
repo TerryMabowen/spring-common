@@ -4,7 +4,7 @@ import com.mbw.common.core.crawler.boc.ExchangeRateCrawlerJob;
 import org.junit.Test;
 
 /**
- * TODO
+ * 测试web Magic 爬取中国银行每日汇率
  *
  * @author Mabowen
  * @date 2020-06-03 10:27
