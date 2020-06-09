@@ -56,6 +56,9 @@ public abstract class OkHttpBaseManager {
     private AtomicInteger speedPerSecond = new AtomicInteger(0);
     private long currentSecond = 0;
 
+    protected Request request;
+    protected Response response;
+
     private String accessToken = "";
     protected Integer expiryTime = 0;
     private Integer retryRefreshToken = 0;
