@@ -14,6 +14,6 @@ public class Test2 {
     @Test
     public void f1() {
         ExchangeRateCrawlerJob job = new ExchangeRateCrawlerJob();
-        job.ExecuteExchangeRateCrawlerTask();
+        job.executeExchangeRateCrawlerTask();
     }
 }

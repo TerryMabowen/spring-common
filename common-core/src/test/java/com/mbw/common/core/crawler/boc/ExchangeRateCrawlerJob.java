@@ -24,7 +24,7 @@ public class ExchangeRateCrawlerJob {
      * 4. 获取数据后入库保存到汇率表中，每个币种每天都有汇率，汇率：1外币金额 = xxx 人民币金额
      * 5. 外币换算人民币计算公式为：人民币金额 = 外币金额 * 该币种当天的汇率
      */
-    public void ExecuteExchangeRateCrawlerTask() {
+    public void executeExchangeRateCrawlerTask() {
         try {
             Calendar cal = Calendar.getInstance();
             Date now = cal.getTime();
