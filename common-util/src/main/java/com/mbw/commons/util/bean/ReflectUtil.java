@@ -1,13 +1,12 @@
-package com.mbw.commons.util.convert;
+package com.mbw.commons.util.bean;
 
+import com.mbw.commons.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Date;
  * @date 2019-12-12 09:50
  */
 @Slf4j
-public class TransformUtil {
+public class ReflectUtil {
     /**
      * 通过属性名称将po转化vo
      *
@@ -23,7 +22,7 @@ public class TransformUtil {
      * @date 20:52 2019-12-11
      * @param property 属性名
      */
-    private void convert(Object vo, Object po, String property) {
+    public static void convert(Object vo, Object po, String property) {
         if (StringUtils.isNotBlank(property)) {
             try {
                 Class<?> voClass = vo.getClass();
@@ -55,15 +54,8 @@ public class TransformUtil {
                             break;
                         }
                         case "class java.util.Date":
-                            try {
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                Date value = simpleDateFormat.parse(String.valueOf(poFieldValue));
-                                invoke(vo, voClass, voField, value);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                                log.error("字符串转换时间类型异常：" + e.getMessage(), e);
-                                throw new RuntimeException("字符串转换时间类型异常：" + e.getMessage());
-                            }
+                            Date value = DateUtil.defaultParse(String.valueOf(poFieldValue));
+                            invoke(vo, voClass, voField, value);
                             break;
                         default:
                             break;
@@ -82,13 +74,12 @@ public class TransformUtil {
      * @author Mabowen
      * @date 21:06 2019-12-11
      */
-    private <T> void invoke(Object vo, Class<?> voClass, Field voField, T value) {
+    private static <T> void invoke(Object vo, Class<?> voClass, Field voField, T value) {
         try {
             String methodName = getMethodName(voField.getName());
             if (StringUtils.isNotBlank(methodName) && value != null) {
                 Method setter = voClass.getMethod("set" + methodName);
                 setter.invoke(vo, value);
-
                 Method getter = voClass.getMethod("get" + methodName);
                 Object val = getter.invoke(vo);
             }
@@ -104,7 +95,7 @@ public class TransformUtil {
      * @author Mabowen
      * @date 21:12 2019-12-11
      */
-    private String getMethodName(String fieldName) {
+    private static String getMethodName(String fieldName) {
         if (StringUtils.isNotBlank(fieldName)) {
             byte[] items = fieldName.getBytes();
             items[0] = (byte) ((char) items[0] - 'a' + 'A');

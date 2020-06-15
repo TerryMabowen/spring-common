@@ -20,7 +20,7 @@ public class CollectionsUtil {
      * @return
      */
     @SafeVarargs
-    public static <T>List<T> convergence(List<T>... args) {
+    public static <T> List<T> convergence(List<T>... args) {
         Set<T> set = new HashSet<>();
         for (List<T> arg : args) {
             set.addAll(arg);

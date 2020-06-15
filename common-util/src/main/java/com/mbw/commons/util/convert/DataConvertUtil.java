@@ -27,7 +27,7 @@ public class DataConvertUtil {
             } else if (EnumDataType.STRING.getValue().equals(type)) {
                 map.put(variate, value);
             } else if (EnumDataType.DATE.getValue().equals(type)) {
-                Date date = DateUtil.parse(value, "yyyy-MM-dd HH:mm:ss");
+                Date date = DateUtil.defaultParse(value);
                 map.put(variate, date);
             } else if (EnumDataType.BOOL.getValue().equals(type)) {
                  if ("true".equals(value.toLowerCase())) {
