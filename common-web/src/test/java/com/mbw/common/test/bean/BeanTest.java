@@ -19,8 +19,8 @@ public class BeanTest {
         BeanUtils.copyProperties(source, copy1);
         A copy2 = new A();
         BeanUtils.copyProperties(source, copy2);
-        copy1.getMap().put(1,"1");
-        copy2.getMap().put(1,"2");
+        copy1.getMap().put(1, "1");
+        copy2.getMap().put(1, "2");
         System.out.println(copy1.getMap().get(1));
         //以为是"1"，实际是"2"
         System.out.println(copy2.getMap().get(1));

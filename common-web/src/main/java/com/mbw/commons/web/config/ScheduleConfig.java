@@ -19,7 +19,8 @@ public class ScheduleConfig implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         //设定一个长度10的定时任务线程池
-        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(10, new BasicThreadFactory.Builder()
+        ScheduledThreadPoolExecutor poolExecutor
+                = new ScheduledThreadPoolExecutor(10, new BasicThreadFactory.Builder()
                 .namingPattern("sync-schedule-pool-%d")
                 .daemon(true)
                 .build());
