@@ -1,18 +1,16 @@
 package com.mbw.commons.util.excel;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,136 +140,5 @@ public class ImportUtil {
                 break;
         }
         return cellValue;
-    }
-
-    /**
-     * excel导出工具类
-     * @param sheetName  工作表
-     * @param titleName   表头
-     * @param fileName     导出的文件名
-     * @param columnNumber   列数
-     * @param columnWidth     列宽
-     * @param columnName      列名
-     * @param dataList        数据
-     * @param response        返回浏览器的响应
-     * @throws Exception
-     */
-    public static void ExportWithResponse(String sheetName, String titleName,
-                                          String fileName, int columnNumber, int[] columnWidth,
-                                          String[] columnName, String[][] dataList,
-                                          HttpServletResponse response) throws Exception {
-        if (columnNumber == columnWidth.length && columnWidth.length == columnName.length) {
-            // 第一步，创建一个webbook，对应一个Excel文件
-            HSSFWorkbook wb = new HSSFWorkbook();
-            // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
-            HSSFSheet sheet = wb.createSheet(sheetName);
-            // sheet.setDefaultColumnWidth(15); //统一设置列宽
-            for (int i = 0; i < columnNumber; i++) {
-                for (int j = 0; j <= i; j++) {
-                    if (i == j) {
-                        sheet.setColumnWidth(i, columnWidth[j] * 256); // 单独设置每列的宽
-                    }
-                }
-            }
-            // 创建第0行 也就是标题
-            HSSFRow row1 = sheet.createRow((int) 0);
-            row1.setHeightInPoints(50);// 设备标题的高度
-            // 第三步创建标题的单元格样式style2以及字体样式headerFont1
-            HSSFCellStyle style2 = wb.createCellStyle();
-            style2.setAlignment(HorizontalAlignment.CENTER);
-            style2.setVerticalAlignment(VerticalAlignment.CENTER);
-            style2.setFillForegroundColor(HSSFColor.HSSFColorPredefined.LIGHT_TURQUOISE.getIndex());
-            style2.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            HSSFFont headerFont1 = (HSSFFont) wb.createFont(); // 创建字体样式
-            headerFont1.setBold(true); // 字体加粗
-            headerFont1.setFontName("黑体"); // 设置字体类型
-            headerFont1.setFontHeightInPoints((short) 15); // 设置字体大小
-            style2.setFont(headerFont1); // 为标题样式设置字体样式
-
-            HSSFCell cell1 = row1.createCell(0);// 创建标题第一列
-            sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, columnNumber - 1)); // 合并列标题
-            cell1.setCellValue(titleName); // 设置值标题
-            cell1.setCellStyle(style2); // 设置标题样式
-
-            // 创建第1行 也就是表头
-            HSSFRow row = sheet.createRow((int) 1);
-            row.setHeightInPoints(37);// 设置表头高度
-
-            // 第四步，创建表头单元格样式 以及表头的字体样式
-            HSSFCellStyle style = wb.createCellStyle();
-            style.setWrapText(true);// 设置自动换行
-            style.setAlignment(HorizontalAlignment.CENTER);
-            style.setVerticalAlignment(VerticalAlignment.CENTER); // 创建一个居中格式
-
-            style.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
-            style.setBorderBottom(BorderStyle.THIN);
-            style.setBorderLeft(BorderStyle.THIN);
-            style.setBorderRight(BorderStyle.THIN);
-            style.setBorderTop(BorderStyle.THIN);
-
-            HSSFFont headerFont = (HSSFFont) wb.createFont(); // 创建字体样式
-            headerFont.setBold(true); // 字体加粗
-            headerFont.setFontName("黑体"); // 设置字体类型
-            headerFont.setFontHeightInPoints((short) 10); // 设置字体大小
-            style.setFont(headerFont); // 为标题样式设置字体样式
-
-            // 第四.一步，创建表头的列
-            for (int i = 0; i < columnNumber; i++) {
-                HSSFCell cell = row.createCell(i);
-                cell.setCellValue(columnName[i]);
-                cell.setCellStyle(style);
-            }
-
-            // 第五步，创建单元格，并设置值
-            for (int i = 0; i < dataList.length; i++) {
-                row = sheet.createRow((int) i + 2);
-                // 为数据内容设置特点新单元格样式1 自动换行 上下居中
-                HSSFCellStyle zidonghuanhang = wb.createCellStyle();
-                zidonghuanhang.setWrapText(true);// 设置自动换行
-                zidonghuanhang.setVerticalAlignment(VerticalAlignment.CENTER); // 创建一个居中格式
-
-                // 设置边框
-                zidonghuanhang.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
-                zidonghuanhang.setBorderBottom(BorderStyle.THIN);
-                zidonghuanhang.setBorderLeft(BorderStyle.THIN);
-                zidonghuanhang.setBorderRight(BorderStyle.THIN);
-                zidonghuanhang.setBorderTop(BorderStyle.THIN);
-
-                // 为数据内容设置特点新单元格样式2 自动换行 上下居中左右也居中
-                HSSFCellStyle zidonghuanhang2 = wb.createCellStyle();
-                zidonghuanhang2.setWrapText(true);// 设置自动换行
-                zidonghuanhang2.setVerticalAlignment(VerticalAlignment.CENTER); // 创建一个上下居中格式
-                zidonghuanhang2.setAlignment(HorizontalAlignment.CENTER);// 左右居中
-
-                // 设置边框
-                zidonghuanhang2.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
-                zidonghuanhang2.setBorderBottom(BorderStyle.THIN);
-                zidonghuanhang2.setBorderLeft(BorderStyle.THIN);
-                zidonghuanhang2.setBorderRight(BorderStyle.THIN);
-                zidonghuanhang2.setBorderTop(BorderStyle.THIN);
-                HSSFCell datacell = null;
-                for (int j = 0; j < columnNumber; j++) {
-                    datacell = row.createCell(j);
-                    datacell.setCellValue(dataList[i][j]);
-                    datacell.setCellStyle(zidonghuanhang2);
-                }
-            }
-
-            // 第六步，将文件存到浏览器设置的下载位置
-            String filename = fileName + ".xls";
-            response.setContentType("application/ms-excel;charset=UTF-8");
-            response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode(filename, "GBK"))));
-            try (OutputStream out = response.getOutputStream()) {
-                wb.write(out);// 将数据写出去
-                String str = "导出" + fileName + "成功！";
-                System.out.println(str);
-            } catch (Exception e) {
-                e.printStackTrace();
-                String str1 = "导出" + fileName + "失败！";
-                System.out.println(str1);
-            }
-        } else {
-            System.out.println("列数目长度名称三个数组长度要一致");
-        }
     }
 }
