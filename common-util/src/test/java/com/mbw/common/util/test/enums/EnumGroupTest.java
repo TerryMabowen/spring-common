@@ -29,4 +29,12 @@ public enum EnumGroupTest implements BaseEnumStatus<Integer> {
     private Integer value;
 
     private String desc;
+
+    public static EnumGroupTest[] getGroup1() {
+        return new EnumGroupTest[] {EXPENSES_CLAIMS, PAYMENT_APPLY, MONEY_RETURN,};
+    }
+
+    public static EnumGroupTest[] getGroup2() {
+        return new EnumGroupTest[] {ADVANCES_PAYMENT_REVERSE, ADVANCES_APPLY, PURCHASE_APPLY,};
+    }
 }

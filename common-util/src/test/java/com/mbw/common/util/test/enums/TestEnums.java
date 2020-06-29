@@ -2,7 +2,6 @@ package com.mbw.common.util.test.enums;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 
 /**
@@ -15,13 +14,7 @@ public class TestEnums {
 
     @Test
     public void f1() {
-        EnumGroupTest.Group1[] values1 = EnumGroupTest.Group1.values();
-        for (EnumGroupTest.Group1 group1 : values1) {
 
-        }
-
-        EnumGroupTest.Group2[] values2 = EnumGroupTest.Group2.values();
-        System.out.println(Arrays.toString(values2));
     }
 
     @Test
