@@ -6,7 +6,6 @@ import com.baidu.unbiz.fluentvalidator.jsr303.HibernateSupportedValidator;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
 
@@ -25,9 +24,6 @@ public class ValidateUtil {
      * @return
      */
     public static <T> Result validate(T t) {
-        if (validator == null) {
-            validator = Validation.buildDefaultValidatorFactory().getValidator();
-        }
         return FluentValidator
                 .checkAll()
                 .on(t, new HibernateSupportedValidator<T>().setHiberanteValidator(validator))

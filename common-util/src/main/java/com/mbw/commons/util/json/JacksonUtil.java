@@ -2,7 +2,6 @@ package com.mbw.commons.util.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mbw.commons.lang.json.JacksonFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,26 +13,22 @@ import org.apache.commons.lang3.StringUtils;
  */
 @Slf4j
 public class JacksonUtil {
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String toJson(Object var) {
+    public static String beanToJson(Object obj) {
         try {
-            ObjectMapper objectMapper = JacksonFactory.getInstance()
-                    .getObjectMapper();
-            return objectMapper.writeValueAsString(var);
+            return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            log.error("Object to json string error: {}" + e.getMessage(), e);
+            log.error("Object to json string error: {}", e.getMessage(), e);
             return StringUtils.EMPTY;
         }
     }
 
-    public static <T> T toObject(String var, Class<T> clz) {
+    public static <T> T jsonToBean(String jsonStr, Class<T> clz) {
         try {
-            ObjectMapper objectMapper = JacksonFactory.getInstance()
-                    .getObjectMapper();
-
-            return objectMapper.readValue(var, clz);
+            return objectMapper.readValue(jsonStr, clz);
         } catch (JsonProcessingException e) {
-            log.error("json string to Object error: {}" + e.getMessage(), e);
+            log.error("json string to Object error: {}", e.getMessage(), e);
             return null;
         }
     }

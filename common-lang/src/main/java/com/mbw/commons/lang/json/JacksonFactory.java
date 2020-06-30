@@ -2,7 +2,6 @@ package com.mbw.commons.lang.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  * TODO
@@ -33,6 +32,6 @@ public class JacksonFactory {
     }
 
     private void init() {
-        objectMapper = Jackson2ObjectMapperBuilder.json().build();
+        objectMapper = new ObjectMapper();
     }
 }
