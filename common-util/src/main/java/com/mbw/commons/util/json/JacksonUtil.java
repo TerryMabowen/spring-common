@@ -1,9 +1,12 @@
 package com.mbw.commons.util.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * Jackson 工具类
@@ -27,6 +30,15 @@ public class JacksonUtil {
     public static <T> T jsonToBean(String jsonStr, Class<T> clz) {
         try {
             return objectMapper.readValue(jsonStr, clz);
+        } catch (JsonProcessingException e) {
+            log.error("json string to Object error: {}", e.getMessage(), e);
+            return null;
+        }
+    }
+
+    public static <T> List<T> jsonToList(String jsonStr, Class<T> clz) {
+        try {
+            return objectMapper.readValue(jsonStr, new TypeReference<List<T>>(){});
         } catch (JsonProcessingException e) {
             log.error("json string to Object error: {}", e.getMessage(), e);
             return null;
