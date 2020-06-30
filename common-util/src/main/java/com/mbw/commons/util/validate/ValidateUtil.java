@@ -17,7 +17,7 @@ import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
  * @date 2020-04-08 22:05
  */
 public class ValidateUtil {
-    private static Validator validator;
+    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**
      * 参数校验
@@ -26,8 +26,7 @@ public class ValidateUtil {
      */
     public static <T> Result validate(T t) {
         if (validator == null) {
-            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-            validator = factory.getValidator();
+            validator = Validation.buildDefaultValidatorFactory().getValidator();
         }
         return FluentValidator
                 .checkAll()

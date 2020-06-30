@@ -3,18 +3,17 @@ package com.mbw.commons.util.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mbw.commons.lang.json.JacksonFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * TODO
+ * Jackson 工具类
  *
  * @author Mabowen
  * @date 2020-05-20 17:08
  */
+@Slf4j
 public class JacksonUtil {
-    private static final Logger log = LoggerFactory.getLogger(JacksonUtil.class);
 
     public static String toJson(Object var) {
         try {
@@ -22,7 +21,6 @@ public class JacksonUtil {
                     .getObjectMapper();
             return objectMapper.writeValueAsString(var);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
             log.error("Object to json string error: {}" + e.getMessage(), e);
             return StringUtils.EMPTY;
         }
@@ -35,7 +33,6 @@ public class JacksonUtil {
 
             return objectMapper.readValue(var, clz);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
             log.error("json string to Object error: {}" + e.getMessage(), e);
             return null;
         }

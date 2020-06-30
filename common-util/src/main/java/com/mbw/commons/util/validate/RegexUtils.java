@@ -15,107 +15,107 @@ public class RegexUtils {
     public RegexUtils() {
     }
 
-    public static final boolean isNull(Object[] objs) {
+    public static boolean isNull(Object[] objs) {
         return objs == null || objs.length == 0;
     }
 
-    public static final boolean isNull(Integer integer) {
+    public static boolean isNull(Integer integer) {
         return integer == null || integer == 0;
     }
 
-    public static final boolean isNull(Collection<?> collection) {
+    public static boolean isNull(Collection<?> collection) {
         return collection == null || collection.size() == 0;
     }
 
-    public static final boolean isNull(Map<?, ?> map) {
+    public static boolean isNull(Map<?, ?> map) {
         return map == null || map.size() == 0;
     }
 
-    public static final boolean isNull(String str) {
+    public static boolean isNull(String str) {
         return str == null || "".equals(str.trim()) || "null".equals(str.toLowerCase());
     }
 
-    public static final boolean isNull(Long longs) {
+    public static boolean isNull(Long longs) {
         return longs == null || longs == 0L;
     }
 
-    public static final boolean isNotNull(Long longs) {
+    public static boolean isNotNull(Long longs) {
         return !isNull(longs);
     }
 
-    public static final boolean isNotNull(String str) {
+    public static boolean isNotNull(String str) {
         return !isNull(str);
     }
 
-    public static final boolean isNotNull(Collection<?> collection) {
+    public static boolean isNotNull(Collection<?> collection) {
         return !isNull(collection);
     }
 
-    public static final boolean isNotNull(Map<?, ?> map) {
+    public static boolean isNotNull(Map<?, ?> map) {
         return !isNull(map);
     }
 
-    public static final boolean isNotNull(Integer integer) {
+    public static boolean isNotNull(Integer integer) {
         return !isNull(integer);
     }
 
-    public static final boolean isNotNull(Object[] objs) {
+    public static boolean isNotNull(Object[] objs) {
         return !isNull(objs);
     }
 
-    public static final boolean isUrl(String str) {
+    public static boolean isUrl(String str) {
         return match(str, "^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$");
     }
 
-    public static final boolean isPwd(String str) {
+    public static boolean isPwd(String str) {
         return match(str, "^[a-zA-Z]\\w{6,12}$");
     }
 
-    public static final boolean stringCheck(String str) {
+    public static boolean stringCheck(String str) {
         return match(str, "^[a-zA-Z0-9一-龥-_]+$");
     }
 
-    public static final boolean isEmail(String str) {
+    public static boolean isEmail(String str) {
         return match(str, "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
     }
 
-    public static final boolean isInteger(String str) {
+    public static boolean isInteger(String str) {
         return match(str, "^[+]?\\d+$");
     }
 
-    public static final boolean isNumeric(String str) {
+    public static boolean isNumeric(String str) {
         return isFloat(str) || isInteger(str);
     }
 
-    public static final boolean isDigits(String str) {
+    public static boolean isDigits(String str) {
         return match(str, "^[0-9]*$");
     }
 
-    public static final boolean isFloat(String str) {
+    public static boolean isFloat(String str) {
         return match(str, "^[-\\+]?\\d+(\\.\\d+)?$");
     }
 
-    public static final boolean isTel(String text) {
+    public static boolean isTel(String text) {
         return isMobile(text) || isPhone(text);
     }
 
-    public static final boolean isPhone(String text) {
+    public static boolean isPhone(String text) {
         return match(text, "^(\\d{3,4}-?)?\\d{7,9}$");
     }
 
-    public static final boolean isMobile(String text) {
+    public static boolean isMobile(String text) {
         return text.length() != 11 ? false : match(text, "^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]){1}|(14[0-9]){1}|(18[0-9]{1}))+\\d{8})$");
     }
 
-    public static final boolean isIdCardNo(String text) {
+    public static boolean isIdCardNo(String text) {
         return match(text, "^(\\d{6})()?(\\d{4})(\\d{2})(\\d{2})(\\d{3})(\\w)$");
     }
 
-    public static final boolean isZipCode(String text) {
+    public static boolean isZipCode(String text) {
         return match(text, "^[0-9]{6}$");
     }
 
-    public static final boolean isIntEqZero(int num) {
+    public static boolean isIntEqZero(int num) {
         return num == 0;
     }
 
@@ -210,7 +210,7 @@ public class RegexUtils {
         return textStr;
     }
 
-    private static final boolean match(String text, String reg) {
+    private static boolean match(String text, String reg) {
         return !StringUtils.isBlank(text) && !StringUtils.isBlank(reg) ? Pattern.compile(reg).matcher(text).matches() : false;
     }
 
