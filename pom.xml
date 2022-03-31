@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <springboot.version>2.2.6.RELEASE</springboot.version>
+        <springboot.version>2.5.12</springboot.version>
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <lombok.version>1.18.12</lombok.version>
