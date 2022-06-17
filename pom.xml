@@ -26,7 +26,7 @@
         <xpath.jaxen.version>1.1.6</xpath.jaxen.version>
         <apache.ant.version>1.10.8</apache.ant.version>
         <alibaba.druid.version>1.1.21</alibaba.druid.version>
-        <alibaba.fastjson.version>1.2.68</alibaba.fastjson.version>
+        <alibaba.fastjson.version>1.2.83</alibaba.fastjson.version>
         <apache.dubbo.version>2.7.6</apache.dubbo.version>
         <zookeeper.version>3.4.14</zookeeper.version>
         <curator.version>4.2.0</curator.version>
