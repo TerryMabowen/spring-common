@@ -57,7 +57,7 @@
         <retrofit2.version>2.5.0</retrofit2.version>
         <apache.httpclient.version>4.5.8</apache.httpclient.version>
         <apache.commons.lang3.version>3.10</apache.commons.lang3.version>
-        <jsoup.version>1.13.1</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <webmagic.version>0.7.3</webmagic.version>
         <!-- Plugin Attribute -->
         <java.version>1.8</java.version>
